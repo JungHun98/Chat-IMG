@@ -1,12 +1,13 @@
-var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
+let markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
+let markers = [];
 
 function createMarkerImage(src, size, options) {
-    var markerImage = new kakao.maps.MarkerImage(src, size, options);
+    let markerImage = new kakao.maps.MarkerImage(src, size, options);
     return markerImage;
 }
 
 function createMarker(position, image) {
-    var marker = new kakao.maps.Marker({
+    let marker = new kakao.maps.Marker({
         position: position,
         image: image
     });
@@ -14,8 +15,9 @@ function createMarker(position, image) {
     return marker;
 }
 
+// precondition: 웹 페이지 로딩시 기본 설정
 function init() {
-    var gpsOptions = {
+    let gpsOptions = {
         enableHighAccuracy: true,
         timeout: 5000,
         maximumAge: 0
@@ -24,41 +26,45 @@ function init() {
     function success(pos) {
         const crd = pos.coords;
 
-        var currentLatitude;
-        var currentLongitude;
-        var latLng;
+        let currentLatitude;
+        let currentLongitude;
+        let latLng;
 
         currentLatitude = crd.latitude;
         currentLongitude = crd.longitude;
         latLng = new kakao.maps.LatLng(currentLatitude, currentLongitude);
 
-        var container = document.getElementById('map');
-        var mapOptions = {
+        let container = document.getElementById('map');
+        let mapOptions = {
             center: latLng,
             level: 3
         };
 
-        var map = new kakao.maps.Map(container, mapOptions);
+        let map = new kakao.maps.Map(container, mapOptions);
 
-        var mapTypeControl = new kakao.maps.MapTypeControl();
+        let mapTypeControl = new kakao.maps.MapTypeControl();
         map.addControl(mapTypeControl, kakao.maps.ControlPosition.TOPRIGHT);
-        var zoomControl = new kakao.maps.ZoomControl();
+        let zoomControl = new kakao.maps.ZoomControl();
         map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
-        var markerImage = new kakao.maps.MarkerImage('./img/current_poi.png', new kakao.maps.Size(35, 40));
-        var marker = new kakao.maps.Marker({
+        let markerImage = new kakao.maps.MarkerImage('./img/current_poi.png', new kakao.maps.Size(35, 40));
+        let marker = new kakao.maps.Marker({
             position: latLng,
             title: '내 위치',
             image: markerImage
         });
 
-        // kakao.maps.event.addListener(marker, 'mouseover', function () {
-        //     infowindow.open(map, marker);
-        // });
+        let infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">내 위치</div>'
+        });
 
-        // kakao.maps.event.addListener(marker, 'mouseout', function () {
-        //     infowindow.close();
-        // });
+        kakao.maps.event.addListener(marker, 'mouseover', function () {
+            infowindow.open(map, marker);
+        });
+
+        kakao.maps.event.addListener(marker, 'mouseout', function () {
+            infowindow.close();
+        });
         marker.setMap(map);
     }
 
