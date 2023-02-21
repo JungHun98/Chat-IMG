@@ -7,15 +7,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script type="text/javascript"
-        src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf382e561fa06565a3b435b6d6b0c797"></script>
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=bf382e561fa06565a3b435b6d6b0c797&libraries=services"></script>
     <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </head>
 
 <body>
     <div id="map">
         <div id="search-container">
-            <input type="button" id="search-box" value="주소검색">
+            <input type="text" id="search-box" placeholder="주소검색">
+            <button id="search-button">검색</button>
             <div id="button-container">
                 <button>걸어서 갈만 한 곳</button>
                 <button>차타고 갈만 한 곳</button>
