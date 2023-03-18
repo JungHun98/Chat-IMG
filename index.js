@@ -55,6 +55,5 @@ app.post('/', async (req, res) => {
 app.listen(port, () => {
     console.log('Example app port: ' + port);
 })
-
 // UI설계 -> UX 설계 -> API 설계
-// UI구현(컴포넌트, App.css) -> API 구현(src/App.js, index.js) 
+// UI구현(컴포넌트, App.css) -> API 구현(src/App.js, index.js)
