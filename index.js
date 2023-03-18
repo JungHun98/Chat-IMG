@@ -3,6 +3,8 @@
 const OpenAI = require('openai');
 const { Configuration, OpenAIApi } = OpenAI;
 
+require('dotenv').config();
+
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -10,8 +12,9 @@ const app = express();
 const port = 3001;
 
 const configuration = new Configuration({
-    apiKey: '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'
+    apiKey: process.env.OPENAI_API_KEY
 });
+
 const openai = new OpenAIApi(configuration);
 
 app.use(bodyParser.json());
@@ -23,20 +26,35 @@ app.post('/', async (req, res) => {
     //     model: "gpt-3.5-turbo",
     //     messages: [{role: "user", content: message}],
     // });
-    const completion = await openai.createImage({
-        prompt: message,
-        size: '256x256'
-    });
+    try {
+        const completion = await openai.createImage({
+            prompt: message,
+            size: '256x256'
+        });
 
-    console.log(completion.data.data[0]);
-    if (completion.data) {
-        res.json({
-            message: completion.data.data[0].url
-        })
-
+        if (completion) {
+            res.json({
+                message: completion.data.data[0].url
+            });
+            console.log('success');
+        }
+    } catch (error) {
+        if (error.response) {
+            console.log(error.response.status);
+            console.log(error.response.data);
+        } else {
+            console.log(error.message);
+        }
     }
+
+
+
+    // console.log(completion.data.data[0]);
 })
 
 app.listen(port, () => {
     console.log('Example app port: ' + port);
 })
+
+// UI설계 -> UX 설계 -> API 설계
+// UI구현(컴포넌트, App.css) -> API 구현(src/App.js, index.js) 
