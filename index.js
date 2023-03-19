@@ -17,6 +17,9 @@ const configuration = new Configuration({
 
 const openai = new OpenAIApi(configuration);
 
+const client_id = process.env.CLIENT_ID;
+const client_secret = process.env.CLIENT_SECRET;
+
 app.use(bodyParser.json());
 app.use(cors());
 
@@ -26,12 +29,12 @@ app.post('/', async (req, res) => {
     //     model: "gpt-3.5-turbo",
     //     messages: [{role: "user", content: message}],
     // });
+
     try {
         const completion = await openai.createImage({
             prompt: message,
             size: '256x256'
         });
-
         if (completion) {
             res.json({
                 message: completion.data.data[0].url
@@ -46,11 +49,31 @@ app.post('/', async (req, res) => {
             console.log(error.message);
         }
     }
-
-
-
     // console.log(completion.data.data[0]);
-})
+});
+
+app.post('/translate', async function (req, res) {
+    let api_url = 'https://openapi.naver.com/v1/papago/n2mt';
+    let request = require('request');
+    const { message } = req.body;
+    let result;
+
+    let options = {
+        url: api_url,
+        form: { 'source': 'ko', 'target': 'en', 'text': message },
+        headers: { 'X-Naver-Client-Id': client_id, 'X-Naver-Client-Secret': client_secret }
+    };
+
+    request.post(options, function (error, response, body) {
+        if (!error && response.statusCode == 200) {
+            console.log(body);
+            res.send(body);
+        } else {
+            res.status(response.statusCode).end();
+            console.log('error = ' + response);
+        }
+    });
+});
 
 app.listen(port, () => {
     console.log('Example app port: ' + port);
