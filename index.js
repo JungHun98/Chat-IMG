@@ -23,7 +23,7 @@ const client_secret = process.env.CLIENT_SECRET;
 app.use(bodyParser.json());
 app.use(cors());
 
-app.post('/', async (req, res) => {
+app.post('/createImage', async (req, res) => {
     const { message } = req.body;
     // const completion = await openai.createChatCompletion({
     //     model: "gpt-3.5-turbo",
@@ -33,7 +33,7 @@ app.post('/', async (req, res) => {
     try {
         const completion = await openai.createImage({
             prompt: message,
-            size: '256x256'
+            size: '512x512'
         });
         if (completion) {
             res.json({
@@ -56,7 +56,6 @@ app.post('/translate', async function (req, res) {
     let api_url = 'https://openapi.naver.com/v1/papago/n2mt';
     let request = require('request');
     const { message } = req.body;
-    let result;
 
     let options = {
         url: api_url,

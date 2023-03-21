@@ -1,6 +1,8 @@
 import logo from './logo.svg';
 import './App.css';
 import { useState } from 'react';
+import Header from './components/Header';
+import Main from './components/Main';
 
 function App() {
   const [message, setMessage] = useState('');
@@ -10,7 +12,7 @@ function App() {
     let prompt;
 
     e.preventDefault();
-    debugger;
+
     await fetch('http://localhost:3001/translate',{
       method:'POST',
       headers:{
@@ -28,7 +30,7 @@ function App() {
 
     console.log(`{"message": ${prompt}}`);
 
-    await fetch('http://localhost:3001/',{
+    await fetch('http://localhost:3001/createImage',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -42,17 +44,18 @@ function App() {
     console.log('done');
   };
 
-  return (
+  return (    
     <div className="App">
-      <form onSubmit={hadleSubmit}>
+      <Header></Header>
+      <Main></Main>
+      {/* <form onSubmit={hadleSubmit}>
         <textarea
         value={message} 
         onChange={(e) => setMessage(e.target.value)}
         ></textarea>
         <button type='submit'>Submit</button>
       </form>
-      <img src={response}></img>
-      {/* <div>{response}</div> */}
+      <img src={response}></img> */}
     </div>
   );
 }
