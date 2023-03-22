@@ -5,16 +5,16 @@ class ImageOption extends Component {
   
   render() {
     
-    let options = [<option value=''>{this.props._label}</option>];
+    let options = [<option value='' key=''>{this.props._label}</option>];
     const valueArr = this.props._values;
 
-    valueArr.forEach(element => {
+    valueArr.forEach((element, idx) => {
       options.push(
-        <option value={element}>{element}</option>
+        <option value={element} key={idx}>{element}</option>
       );
     });
     return (
-      <div class={this.props._class}>
+      <div className={this.props._class}>
         {/* <label for={this.props._class + '-select'}>{this.props._label}</label> */}
         <select id={this.props._class + '-select'}>
           {options}

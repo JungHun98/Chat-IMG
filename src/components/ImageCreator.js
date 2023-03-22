@@ -1,4 +1,4 @@
-import '../App.css';
+
 import { Component } from 'react';
 import ImageOption from './ImageOption';
 
@@ -35,13 +35,13 @@ class ImageCreator extends Component {
   render() {
     return (
       <section id='image-creator'>
-        <div class='set-box'>
-          <div class='image-attribute'>
+        <div className='set-box'>
+          <div className='image-attribute'>
             {this.getOption('size')}  
             {this.getOption('count')}
           </div>
         </div>
-        <div class='image-box'>
+        <div className='image-box'>
           <article>사진</article>
         </div>
       </section>
