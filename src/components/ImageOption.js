@@ -1,4 +1,4 @@
-import '../App.css';
+import './ImageOption.css';
 import { Component } from 'react';
 
 class ImageOption extends Component {
@@ -16,7 +16,7 @@ class ImageOption extends Component {
     return (
       <div className={this.props._class}>
         {/* <label for={this.props._class + '-select'}>{this.props._label}</label> */}
-        <select id={this.props._class + '-select'}>
+        <select id={this.props._class + '-select'} onChange={this.props.setImageSize()}>
           {options}
         </select>
       </div>

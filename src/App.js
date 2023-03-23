@@ -1,6 +1,6 @@
 import logo from './logo.svg';
 import './App.css';
-import { Link } from 'react-router-dom';
+import { Routes, Route, Link } from 'react-router-dom';
 
 import { useState } from 'react';
 import Header from './components/Header';
@@ -48,8 +48,12 @@ function App() {
 
   return (    
     <div className="App">
-      <Header></Header>
-      <Main></Main>
+      <Header>
+      </Header>
+      <Routes>
+        <Route exact path='/'></Route>
+        <Route path='/Main' Component={Main}></Route>
+      </Routes>
       {/* <form onSubmit={hadleSubmit}>
         <textarea
         value={message} 
