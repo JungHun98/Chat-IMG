@@ -6,6 +6,8 @@ import  TextContainer from './TextContainer';
 class Main extends Component{
   
   render(){
+    console.log('Main render');
+
     return(
       <main id='main'>
         <ImageCreator></ImageCreator>

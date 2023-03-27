@@ -1,4 +1,4 @@
-
+import '../css/ImageCreator.css'
 import { Component } from 'react';
 import ImageOption from './ImageOption';
 
@@ -11,12 +11,12 @@ class ImageCreator extends Component {
     }
 
     this.state = {
-      sizeOption: ['256x256', '512x512', '1024x1024'],
+      sizeOption: ['256', '512', '1024'],
       countOption: count,
-      imageSize: '256px'
+      imageSize: '256'
     }
 
-    this.setState = this.setState.bind(this);
+    this.setImageSize = this.setImageSize.bind(this);
   }
 
   setImageSize(pixel){
@@ -43,10 +43,14 @@ class ImageCreator extends Component {
 
   render() {
     const imgStyle={
-      width: this.state.imageSize,
-      height: this.state.imageSize,
-      background:'black'
+      margin: 'auto',
+      width: this.state.imageSize + 'px',
+      height: this.state.imageSize + 'px',
+      background:'black',
+      transition: '0.3s'
     }
+    
+    console.log('ImageCreator render');
 
     return (
       <section id='image-creator'>
@@ -57,7 +61,7 @@ class ImageCreator extends Component {
           </div>
         </div>
         <article id='image-box'>
-          <div style={imgStyle}>사진</div>
+          <div className='image-div' style={imgStyle}>사진</div>
         </article>
       </section>
     );

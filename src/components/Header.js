@@ -1,4 +1,4 @@
-import './Header.css';
+import '../css/Header.css';
 import Main from './Main';
 import { Route, Routes, Link } from 'react-router-dom';
 import { Component } from 'react';
@@ -32,6 +32,8 @@ class Header extends Component {
   }
 
   render() {
+    console.log('Header render');
+
     return (
       <header id="header">
         <div className="header-con">

@@ -2,7 +2,7 @@ import logo from './logo.svg';
 import './App.css';
 import { Routes, Route, Link } from 'react-router-dom';
 
-import { useState } from 'react';
+import { useState, Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 
@@ -46,7 +46,9 @@ function App() {
     console.log('done');
   };
 
+  console.log('App render');
   return (    
+    
     <div className="App">
       <Header>
       </Header>

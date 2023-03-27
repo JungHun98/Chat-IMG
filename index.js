@@ -7,7 +7,8 @@ require('dotenv').config();
 
 const express = require('express');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors'); 
+// cors가 여기서 쓰인거구나나
 const app = express();
 const port = 3001;
 
