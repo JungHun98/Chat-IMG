@@ -17,9 +17,17 @@ class ImageCreator extends Component {
     }
 
     this.setImageSize = this.setImageSize.bind(this);
+    this.getOption = this.getOption.bind(this);
   }
 
+  // 메인 컴포넌트의 값을 세팅해야 함
   setImageSize(pixel){
+    this.setState({
+      imageSize: pixel
+    })
+  }
+
+  setImageCount(pixel){
     this.setState({
       imageSize: pixel
     })
@@ -32,7 +40,7 @@ class ImageCreator extends Component {
       _option = <ImageOption _class={option} _label='이미지 크기' _values={this.state.sizeOption} setSize={this.setImageSize}></ImageOption>
     }
     else if(option === 'count'){
-      _option = <ImageOption _class={option} _label='이미지 개수' _values={this.state.countOption}></ImageOption>
+      _option = <ImageOption _class={option} _label='이미지 개수' _values={this.state.countOption} setCount={this.setImageCount}></ImageOption>
     }
     else{
       _option = 'option Input error';
@@ -46,7 +54,7 @@ class ImageCreator extends Component {
       margin: 'auto',
       width: this.state.imageSize + 'px',
       height: this.state.imageSize + 'px',
-      background:'black',
+      border: '1px solid black',
       transition: '0.3s'
     }
     

@@ -2,19 +2,30 @@ import '../css/ImageOption.css';
 import { Component } from 'react';
 
 class ImageOption extends Component {
-  // 이미지 개수 옵션 예외 처리 해야함
+  constructor(props){
+    super(props);
+
+    this.state = {
+      mode: this.props._class,
+      value: ''
+    };
+  }
+
+  shouldComponentUpdate(newProps, newState){
+    return newState.value !== this.state.value;
+  }
+
   render() {
     
     let options = [<option value='' key=''>{this.props._label}</option>];
     const valueArr = this.props._values;
 
     valueArr.forEach((element, idx) => {
-      
-      let size = element + 'x' + element;
       options.push(
-        <option value={element} key={idx}>{size}</option>
+        <option value={element} key={idx}>{element}</option>
       );
     });
+
     console.log('ImageOption render');
 
     return (
@@ -23,7 +34,14 @@ class ImageOption extends Component {
         <select id={this.props._class + '-select'} 
         onChange={function (e) {
           console.log(e.target.value);
-          this.props.setSize(e.target.value);
+          this.setState({
+            value: e.target.value
+          });
+
+          if(this.state.mode === 'size'){
+            this.props.setSize(e.target.value);
+          }
+          
         }.bind(this)}>
           {options}
         </select>
