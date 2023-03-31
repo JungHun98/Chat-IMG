@@ -12,35 +12,23 @@ class ImageCreator extends Component {
 
     this.state = {
       sizeOption: ['256', '512', '1024'],
-      countOption: count,
-      imageSize: '256'
+      countOption: count
     }
 
-    this.setImageSize = this.setImageSize.bind(this);
     this.getOption = this.getOption.bind(this);
   }
 
-  // 메인 컴포넌트의 값을 세팅해야 함
-  setImageSize(pixel){
-    this.setState({
-      imageSize: pixel
-    })
-  }
 
-  setImageCount(pixel){
-    this.setState({
-      imageSize: pixel
-    })
-  }
+  // 메인 컴포넌트의 값을 세팅해야 함
 
   getOption(option){
     let _option;
 
     if(option === 'size'){
-      _option = <ImageOption _class={option} _label='이미지 크기' _values={this.state.sizeOption} setSize={this.setImageSize}></ImageOption>
+      _option = <ImageOption _class={option} _label='이미지 크기' _values={this.state.sizeOption} setSize={this.props.setImgSize}></ImageOption>
     }
     else if(option === 'count'){
-      _option = <ImageOption _class={option} _label='이미지 개수' _values={this.state.countOption} setCount={this.setImageCount}></ImageOption>
+      _option = <ImageOption _class={option} _label='이미지 개수' _values={this.state.countOption} setCount={this.props.setImgCount}></ImageOption>
     }
     else{
       _option = 'option Input error';
@@ -50,10 +38,11 @@ class ImageCreator extends Component {
   }
 
   render() {
+
     const imgStyle={
       margin: 'auto',
-      width: this.state.imageSize + 'px',
-      height: this.state.imageSize + 'px',
+      width: this.props.imgInfo.imgSize + 'px',
+      height: this.props.imgInfo.imgSize + 'px',
       border: '1px solid black',
       transition: '0.3s'
     }

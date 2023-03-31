@@ -8,16 +8,25 @@ class Main extends Component{
     super(props);
 
     this.state = {
-      imgSize: '',
-      imgCount: 0
+      imgSize: '256',
+      imgCount: 1
     };
 
-    this.setMainState = this.setMainState.bind(this);
+    this.setImgSize = this.setImgSize.bind(this);
+    this.setImgCount = this.setImgCount.bind(this);
   }
 
-  setMainState(newSize, newCount){
+  // textcontainer에 이미지 정보 props로 전달하기
+
+  setImgSize(newSize){
     this.setState({
-      imgSize: newSize,
+      imgSize: newSize
+    })
+  }
+
+  
+  setImgCount(newCount){
+    this.setState({
       imgCount: newCount
     })
   }
@@ -27,8 +36,8 @@ class Main extends Component{
 
     return(
       <main id='main'>
-        <ImageCreator imgInfo={this.state}></ImageCreator>
-        <TextContainer></TextContainer>
+        <ImageCreator imgInfo={this.state} setImgSize={this.setImgSize} setImgCount={this.setImgCount}></ImageCreator>
+        <TextContainer imgInfo={this.state}></TextContainer>
       </main>
     );
   }

@@ -4,7 +4,6 @@ import { Component } from 'react';
 class TextContainer extends Component {
   constructor(props){
     super(props);
-    
     this.state = {
       inputText: ''
     }
@@ -19,16 +18,24 @@ class TextContainer extends Component {
       },
       body: JSON.stringify({message})
     })
-    .then((response) => {
-      return response.json();
-    })
-    .then((data) => {
-      return data.message.result.translatedText;
-    });
+    .then((response) => response.json())
+    .then((data) => data.message.result.translatedText);
   }
 
-  getImages(prompt, imageCount){
+  getImages(prompt){
+    const obj = {
+      message: prompt,
+      imgInfo: this.props.imgInfo
+    }
 
+    return fetch('http://localhost:3001/createImage',{
+      method:'POST',
+      headers:{
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(obj)
+    })
+    .then((res) => res.json())
   }
 
   async hadleSubmit(e) {
@@ -36,10 +43,13 @@ class TextContainer extends Component {
     console.log(this.state.inputText);
     const translatedText = await this.translate(this.state.inputText);
     console.log(translatedText);
-    const imageUrls = await this.imageUrls(translatedText);
+    const imageUrls = await this.getImages(translatedText);
+    console.log(imageUrls);
   }
 
   render() {
+    console.log(this.props.imgInfo);
+
     console.log('TextContainer render');
     let textBox = {
       maxWidth: '600px',

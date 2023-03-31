@@ -25,7 +25,8 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/createImage', async (req, res) => {
-    const { message } = req.body;
+    const message = req.body.message;
+    console.log(req.body);
     // const completion = await openai.createChatCompletion({
     //     model: "gpt-3.5-turbo",
     //     messages: [{role: "user", content: message}],
@@ -34,11 +35,14 @@ app.post('/createImage', async (req, res) => {
     try {
         const completion = await openai.createImage({
             prompt: message,
-            size: '512x512'
+            n: Number(req.body.imgInfo.imgCount),
+            size: '256x256'
         });
         if (completion) {
+            console.log(completion.data.data);
+
             res.json({
-                message: completion.data.data[0].url
+                message: completion.data.data
             });
             console.log('success');
         }
@@ -50,7 +54,6 @@ app.post('/createImage', async (req, res) => {
             console.log(error.message);
         }
     }
-    // console.log(completion.data.data[0]);
 });
 
 app.post('/translate', async function (req, res) {

@@ -41,6 +41,9 @@ class ImageOption extends Component {
           if(this.state.mode === 'size'){
             this.props.setSize(e.target.value);
           }
+          else{
+            this.props.setCount(e.target.value);
+          }
           
         }.bind(this)}>
           {options}
