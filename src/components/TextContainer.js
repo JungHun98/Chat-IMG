@@ -11,12 +11,15 @@ class TextContainer extends Component {
   }
 
   translate(message){
+    const obj = {
+      message: message
+    }
     return fetch('http://localhost:3001/translate',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({message})
+      body: JSON.stringify(obj)
     })
     .then((response) => response.json())
     .then((data) => data.message.result.translatedText);
@@ -43,8 +46,12 @@ class TextContainer extends Component {
     console.log(this.state.inputText);
     const translatedText = await this.translate(this.state.inputText);
     console.log(translatedText);
+    
     const imageUrls = await this.getImages(translatedText);
-    console.log(imageUrls);
+
+    this.props.setImgUrls(imageUrls.message);
+
+    // console.log(imageUrls);
   }
 
   render() {

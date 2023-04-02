@@ -9,11 +9,13 @@ class Main extends Component{
 
     this.state = {
       imgSize: '256',
-      imgCount: 1
+      imgCount: 1,
+      imgUrls: []
     };
 
     this.setImgSize = this.setImgSize.bind(this);
     this.setImgCount = this.setImgCount.bind(this);
+    this.setImgUrls = this.setImgUrls.bind(this);
   }
 
   // textcontainer에 이미지 정보 props로 전달하기
@@ -31,13 +33,19 @@ class Main extends Component{
     })
   }
 
+  setImgUrls(newUrls){
+    this.setState({
+      imgUrls: newUrls
+    })
+  }
+
   render(){
     console.log('Main render');
 
     return(
       <main id='main'>
         <ImageCreator imgInfo={this.state} setImgSize={this.setImgSize} setImgCount={this.setImgCount}></ImageCreator>
-        <TextContainer imgInfo={this.state}></TextContainer>
+        <TextContainer imgInfo={this.state} setImgUrls={this.setImgUrls}></TextContainer>
       </main>
     );
   }

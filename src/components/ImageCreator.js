@@ -12,12 +12,12 @@ class ImageCreator extends Component {
 
     this.state = {
       sizeOption: ['256', '512', '1024'],
-      countOption: count
+      countOption: count,
+      imgs: this.props.imgInfo.imgUrls
     }
 
     this.getOption = this.getOption.bind(this);
   }
-
 
   // 메인 컴포넌트의 값을 세팅해야 함
 
@@ -58,7 +58,9 @@ class ImageCreator extends Component {
           </div>
         </div>
         <article id='image-box'>
-          <div className='image-div' style={imgStyle}>사진</div>
+          <div className='image-div' style={imgStyle}>
+            <img src={this.state.imgs[0]?.url} alt='사진'></img>
+          </div>
         </article>
       </section>
     );
