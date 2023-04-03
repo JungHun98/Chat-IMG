@@ -13,13 +13,14 @@ class ImageCreator extends Component {
     this.state = {
       sizeOption: ['256', '512', '1024'],
       countOption: count,
-      imgs: this.props.imgInfo.imgUrls
+      imgs: []
     }
 
     this.getOption = this.getOption.bind(this);
   }
 
   // 메인 컴포넌트의 값을 세팅해야 함
+  
 
   getOption(option){
     let _option;
@@ -37,8 +38,17 @@ class ImageCreator extends Component {
     return _option;
   }
 
-  render() {
+  componentDidUpdate(prevProps) {
+    // 전형적인 사용 사례 (props 비교를 잊지 마세요)
+    if (this.props.imgInfo.imgUrls !== prevProps.imgInfo.imgUrls) {
+      this.setState({
+        imgs: this.props.imgInfo.imgUrls
+      })
+    }
+  }
 
+  render() {
+    let url;
     const imgStyle={
       margin: 'auto',
       width: this.props.imgInfo.imgSize + 'px',
@@ -47,6 +57,13 @@ class ImageCreator extends Component {
       transition: '0.3s'
     }
     
+    if(this.props.imgInfo.imgUrls[0]?.url){
+      url = this.props.imgInfo.imgUrls[0].url;
+    }
+    else{
+      url = '/assets/sample_image.png';
+    }
+
     console.log('ImageCreator render');
 
     return (
@@ -59,7 +76,7 @@ class ImageCreator extends Component {
         </div>
         <article id='image-box'>
           <div className='image-div' style={imgStyle}>
-            <img src={this.state.imgs[0]?.url} alt='사진'></img>
+            <img src={url} alt='사진'></img>
           </div>
         </article>
       </section>

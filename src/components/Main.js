@@ -42,6 +42,7 @@ class Main extends Component{
   render(){
     console.log('Main render');
 
+    debugger;
     return(
       <main id='main'>
         <ImageCreator imgInfo={this.state} setImgSize={this.setImgSize} setImgCount={this.setImgCount}></ImageCreator>

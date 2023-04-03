@@ -48,10 +48,8 @@ class TextContainer extends Component {
     console.log(translatedText);
     
     const imageUrls = await this.getImages(translatedText);
-
+    debugger;
     this.props.setImgUrls(imageUrls.message);
-
-    // console.log(imageUrls);
   }
 
   render() {
