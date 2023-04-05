@@ -23,3 +23,6 @@ Chat-IMG 애플리케이션은 다음과 같은 기능을 제공합니다.
 - 사용자는 텍스트를 입력하여 이미지를 생성할 수 있습니다.
 - 이미지 생성에는 OpenAI GPT-3 API가 사용됩니다.
 - 생성된 이미지는 웹 페이지에서 볼 수 있습니다.
+
+# 결과 예시
+![image](https://user-images.githubusercontent.com/97653343/229962639-faf1c476-8f86-4a48-aa52-00d951a792a7.png)
