@@ -1,6 +1,8 @@
 Chat-IMG
 
-OpenAI GPT-3 API를 사용하여 이미지 묘사 텍스트를 입력받아 이미지를 생성하는 애플리케이션입니다.
+OpenAI GPT-3 API, PaPago API를 사용하여 이미지 묘사 텍스트를 입력받아 이미지를 생성하는 애플리케이션입니다.
+
+https://junghun98.github.io/Chat-IMG/
 
 # 설치 및 실행
 이 저장소를 클론하고 다음 명령어를 입력하여 애플리케이션을 실행 할 수 있습니다.
