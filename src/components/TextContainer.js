@@ -14,7 +14,7 @@ class TextContainer extends Component {
     const obj = {
       message: message
     }
-    return fetch('http://localhost:3001/translate',{
+    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/translate',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ class TextContainer extends Component {
       imgInfo: this.props.imgInfo
     }
 
-    return fetch('http://localhost:3001/createImage',{
+    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/createImage',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',

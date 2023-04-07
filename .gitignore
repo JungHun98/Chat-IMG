@@ -63,4 +63,5 @@ $RECYCLE.BIN/
 *.lnk
 
 *.env
+build*
 # End of https://www.toptal.com/developers/gitignore/api/windows,visualstudiocode,react

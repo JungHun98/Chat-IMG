@@ -56,12 +56,10 @@ class ImageCreator extends Component {
       border: '1px solid black',
       transition: '0.3s'
     }
-    
+    let imgContent;
     if(this.props.imgInfo.imgUrls[0]?.url){
       url = this.props.imgInfo.imgUrls[0].url;
-    }
-    else{
-      url = '/assets/sample_image.png';
+      imgContent = <img src={url} alt='사진'></img>;
     }
 
     console.log('ImageCreator render');
@@ -76,7 +74,7 @@ class ImageCreator extends Component {
         </div>
         <article id='image-box'>
           <div className='image-div' style={imgStyle}>
-            <img src={url} alt='사진'></img>
+            {imgContent}
           </div>
         </article>
       </section>

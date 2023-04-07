@@ -53,7 +53,7 @@ function App() {
       <Header>
       </Header>
       <Routes>
-        <Route exact path='/'></Route>
+        <Route exact path='/Chat-IMG'></Route>
         <Route path='/Main' Component={Main}></Route>
       </Routes>
       {/* <form onSubmit={hadleSubmit}>
