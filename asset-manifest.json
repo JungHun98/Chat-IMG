@@ -1,0 +1,16 @@
+{
+  "files": {
+    "main.css": "/JungHun98/Chat-IMG/static/css/main.b06271a6.css",
+    "main.js": "/JungHun98/Chat-IMG/static/js/main.148e7136.js",
+    "static/js/787.c7db9507.chunk.js": "/JungHun98/Chat-IMG/static/js/787.c7db9507.chunk.js",
+    "static/media/logo.svg": "/JungHun98/Chat-IMG/static/media/logo.6ce24c58023cc2f8fd88fe9d219db6c6.svg",
+    "index.html": "/JungHun98/Chat-IMG/index.html",
+    "main.b06271a6.css.map": "/JungHun98/Chat-IMG/static/css/main.b06271a6.css.map",
+    "main.148e7136.js.map": "/JungHun98/Chat-IMG/static/js/main.148e7136.js.map",
+    "787.c7db9507.chunk.js.map": "/JungHun98/Chat-IMG/static/js/787.c7db9507.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.b06271a6.css",
+    "static/js/main.148e7136.js"
+  ]
+}
