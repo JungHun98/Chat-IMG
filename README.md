@@ -18,6 +18,8 @@ npm start // react 애플리케이션 실행
 # 기술 스택
 - React
 - Node.js
+- 프론트엔드 배포: github 호스팅
+- 서버 배포: cloudtype
 
 # 기능
 Chat-IMG 애플리케이션은 다음과 같은 기능을 제공합니다.
