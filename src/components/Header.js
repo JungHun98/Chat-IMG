@@ -1,6 +1,5 @@
 import '../css/Header.css';
-import Main from './Main';
-import { Route, Routes, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { Component } from 'react';
 
 class Header extends Component {

@@ -6,7 +6,7 @@ class ImageCreator extends Component {
   constructor(props){
     super(props);
     let count = [];
-    for (let index = 1; index <= 10; index++) {
+    for (let index = 1; index <= 1; index++) {
       count.push(index);
     }
 
