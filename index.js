@@ -2,6 +2,7 @@
 
 const OpenAI = require('openai');
 const { Configuration, OpenAIApi } = OpenAI;
+const request = require('request');
 
 require('dotenv').config();
 
@@ -25,40 +26,63 @@ app.use(bodyParser.json());
 app.use(cors());
 
 app.post('/createImage', async (req, res) => {
+    console.log('get image');
     const message = req.body.message;
-    console.log(req.body);
+    const apiUrl = "https://api.kakaobrain.com/v1/inference/karlo/t2i";
+    
+    let options = {
+        method: 'POST',
+        headers: { 
+            'Authorization': `KakaoAK ${process.env.KARLO_API_KEY}`,
+            'Content-Type': 'application/json' 
+        },
+        body: JSON.stringify({
+            'prompt': {
+                'text': message,
+                'batch_size': 1
+            }
+        })
+    };
+
+    console.log(process.env.KARLO_API_KEY);
+
+    const response = await fetch(apiUrl, options)
+    .then(response => response.json())
+
+    res.send(response);
+    
     // const completion = await openai.createChatCompletion({
     //     model: "gpt-3.5-turbo",
     //     messages: [{role: "user", content: message}],
     // });
 
-    try {
-        const completion = await openai.createImage({
-            prompt: message,
-            n: Number(req.body.imgInfo.imgCount),
-            size: '256x256'
-        });
-        if (completion) {
-            console.log(completion.data.data);
 
-            res.json({
-                message: completion.data.data
-            });
-            console.log('success');
-        }
-    } catch (error) {
-        if (error.response) {
-            console.log(error.response.status);
-            console.log(error.response.data);
-        } else {
-            console.log(error.message);
-        }
-    }
+    // try {
+    //     const completion = await openai.createImage({
+    //         prompt: message,
+    //         n: Number(req.body.imgInfo.imgCount),
+    //         size: '256x256' // req.body.imgInfo.imgSize
+    //     });
+    //     if (completion) {
+    //         console.log(completion.data.data);
+
+    //         res.json({
+    //             message: completion.data.data
+    //         });
+    //         console.log('success');
+    //     }
+    // } catch (error) {
+    //     if (error.response) {
+    //         console.log(error.response.status);
+    //         console.log(error.response.data);
+    //     } else {
+    //         console.log(error.message);
+    //     }
+    // }
 });
 
 app.post('/translate', async function (req, res) {
     let api_url = 'https://openapi.naver.com/v1/papago/n2mt';
-    let request = require('request');
     const { message } = req.body;
 
     let options = {

@@ -57,9 +57,10 @@ class ImageCreator extends Component {
       transition: '0.3s'
     }
     let imgContent;
-    if(this.props.imgInfo.imgUrls[0]?.url){
-      url = this.props.imgInfo.imgUrls[0].url;
-      imgContent = <img src={url} alt='사진'></img>;
+    
+    if(!this.props.imgInfo.imgUrls){
+      url = this.props.imgInfo.imgUrls;
+      imgContent = <img src={url} alt='사진' width={this.props.imgInfo.imgSize}></img>;
     }
 
     console.log('ImageCreator render');

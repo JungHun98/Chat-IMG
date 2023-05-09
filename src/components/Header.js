@@ -39,9 +39,9 @@ class Header extends Component {
           <div className="project-name">
             <Link className='home' to='/' onClick={this.setLink}>IMAGE EDIT</Link>            
           </div>
-          <div className={this.state.linkState + "-link"} >
+          {/* <div className={this.state.linkState + "-link"} >
             <Link className={this.state.linkState} to={this.state.path} onClick={this.setLink}>{this.state.linkState}</Link>
-          </div>
+          </div> */}
         </div>
       </header>
     );

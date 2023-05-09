@@ -14,7 +14,7 @@ class TextContainer extends Component {
     const obj = {
       message: message
     }
-    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/translate',{
+    return fetch('http://localhost:3001/translate',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -31,7 +31,7 @@ class TextContainer extends Component {
       imgInfo: this.props.imgInfo
     }
 
-    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/createImage',{
+    return fetch('http://localhost:3001/createImage',{
       method:'POST',
       headers:{
         'Content-Type': 'application/json',
@@ -39,6 +39,7 @@ class TextContainer extends Component {
       body: JSON.stringify(obj)
     })
     .then((res) => res.json())
+    .then((res) => res.images[0].image)
   }
 
   async hadleSubmit(e) {
@@ -47,9 +48,9 @@ class TextContainer extends Component {
     const translatedText = await this.translate(this.state.inputText);
     console.log(translatedText);
     
-    const imageUrls = await this.getImages(translatedText);
-    debugger;
-    this.props.setImgUrls(imageUrls.message);
+    const imageUrls = 'data:image/png;base64,' + await this.getImages(translatedText);
+    
+    this.props.setImgUrls(imageUrls);
   }
 
   render() {
