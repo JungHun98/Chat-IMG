@@ -3,28 +3,45 @@ import './App.css';
 import { Component } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button'
+// import SendIcon from '@mui/icons-material/Send'
 
-class App extends Component {
+function App(props) {
 
-  render(){
-    console.log('App render');
+  console.log('App render');
 
-    return (
+  return (
 
-      <div className="App">
-        <Header>
-        </Header>
-        <Main>
+    <div className="App">
+      <Header>
+      </Header>
+      <Main>
 
-        </Main>
-        {/* <Routes>
+      </Main>
+      {/* <Routes>
           <Route exact path='/Chat-IMG' Component={Main}></Route>
           <Route path='/Main' Component={Main}></Route>
         </Routes> */}
-      </div>
-    );
-  }
-  
+      <Box
+        sx={{
+          width: 800,
+          maxWidth: '100%',
+          margin: 'auto',
+          marginTop: '20px'
+        }}
+      >
+        <TextField fullWidth label="Prompt" id="fullWidth" sx={{
+          margin: 'auto'
+        }}/>
+        <Button variant="contained">
+          Send
+        </Button>
+      </Box>
+
+    </div>
+  )
 }
 
 export default App;
