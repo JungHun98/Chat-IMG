@@ -1,7 +1,7 @@
 // import { Configuration, OpenAIApi } from 'openai';
 
 const OpenAI = require('openai');
-const { Configuration, OpenAIApi } = OpenAI;
+// const { Configuration, OpenAIApi } = OpenAI;
 const request = require('request');
 
 require('dotenv').config();
@@ -13,11 +13,11 @@ const cors = require('cors');
 const app = express();
 const port = 3001;
 
-const configuration = new Configuration({
-    apiKey: process.env.OPENAI_API_KEY
-});
+// const configuration = new Configuration({
+//     apiKey: process.env.OPENAI_API_KEY
+// });
 
-const openai = new OpenAIApi(configuration);
+// const openai = new OpenAIApi(configuration);
 
 const client_id = process.env.CLIENT_ID;
 const client_secret = process.env.CLIENT_SECRET;
@@ -43,8 +43,6 @@ app.post('/createImage', async (req, res) => {
             }
         })
     };
-
-    console.log(process.env.KARLO_API_KEY);
 
     const response = await fetch(apiUrl, options)
     .then(response => response.json())
