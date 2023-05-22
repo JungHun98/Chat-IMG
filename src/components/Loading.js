@@ -1,5 +1,5 @@
 import '../App.css';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
@@ -7,7 +7,6 @@ import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
-import Box from '@mui/material/Box';
 
 const MyStack = styled(Stack)({
   margin: 'auto',
@@ -19,10 +18,6 @@ const ImageSkeleton = styled(Skeleton)({
   margin: 'auto'
 })
 
-const imageBox = styled(Box)({
-  margin: 'auto'
-})
-
 const ButtonGrid = styled(Grid)({
   width: '256px',
   justifyContent: 'space-between',
@@ -31,24 +26,28 @@ const ButtonGrid = styled(Grid)({
 })
 
 function Loading(props) {
-  const [image, setImage] = useState(`${process.env.PUBLIC_URL}/assets/sample_image.png`);
+  const [image, setImage] = useState(undefined);
   const [{ imageSize, warning }, setSize] = useState({
     imageSize: 256,
     warning: false
-  }
-  );
+  });
+  
+  useEffect(()=>{
+    console.log(props.image);
+    setImage(props.image)
+  }, [props.image]);
+
   console.log(imageSize, warning);
-  let img = true;
 
   return (
     <MyStack spacing={1}>
       {/* For variant="text", adjust the height via font-size */}
       {/* For other variants, adjust the size with `width` and `height` */}
       {image ? (
-        <imageBox>
+        <div>
           <img src={image} alt="" width={imageSize}
             style={{ transition: '0.3s' }} />
-        </imageBox>
+        </div>
       ) : (
         <ImageSkeleton animation="wave" variant="rectangular" width={256} height={256} />
       )}
@@ -88,26 +87,24 @@ function Loading(props) {
           }
           />
           <Button variant="outlined" onClick={(e) => {
+            console.log(imageSize);
             let img = new Image();
             img.src = image;
-            img.width = 256;
-            img.height = 256;
+            img.width = 1024;
+            img.height = 1024; // 설정값
 
-            var canvas = document.createElement("canvas");
+            let canvas = document.createElement("canvas");
             canvas.width = imageSize;
             canvas.height = imageSize;
 
-            var ctx = canvas.getContext("2d");
+            let ctx = canvas.getContext("2d");
             // base64 resizing
             ctx.drawImage(img, 0, 0, imageSize, imageSize);
-
-            var dataURL = canvas.toDataURL("image/png");
-            dataURL.replace(/^data:image\/?[A-z]*;base64,/);
-
+            
             // imgage download
             let a = document.createElement("a"); //Create <a>
-            a.href = dataURL //Image Base64 Goes here
-            a.download = "Image.png"; //File name Here
+            a.href = canvas.toDataURL(); //Image Base64 Goes here
+            a.download = "ChatIMG.png"; //File name Here
             a.click();
           }}>Download</Button>
         </ButtonGrid>

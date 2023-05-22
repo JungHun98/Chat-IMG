@@ -1,20 +1,45 @@
 import '../App.css';
-import { Component } from 'react';
-import ImageCreator from './ImageCreator';
-import TextContainer from './TextContainer';
+import { useEffect, useState } from 'react';
+
 import InitContent from './InitContent';
+import Loading from './Loading';
+import TextContainer from './TextContainer';
+import Box from '@mui/material/Box';
 
 function Main(props) {
 
-  
-  let content = <InitContent></InitContent>;
+  const [mainState, setMain] = useState('init');
+  const [mainContent, setContent] = useState();
+  const [imageCode, setImage] = useState(undefined);
 
+  useEffect(()=>{
+
+    if(mainState === 'init'){
+      setContent(<InitContent></InitContent>)
+    }
+    else if(mainState === 'loading'){
+      setContent(<Loading image={imageCode}></Loading>)
+    }
+    else{
+      setContent(`state error: mainconent is ${mainState}`);
+    }
+  }, [mainState, imageCode])
+  
   return (
     <main id='main'>
-      {content}
+      {mainContent}
+      <Box
+        sx={{
+          width: 800,
+          maxWidth: '100%',
+          margin: 'auto',
+          marginTop: '20px'
+        }}
+      >
+        <TextContainer setImage={setImage} setMain={setMain}></TextContainer>
+      </Box>
     </main>
   );
-
 }
 
 export default Main;
