@@ -1,5 +1,5 @@
 import '../css/TextContainer.css';
-import {  useState } from 'react';
+import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
@@ -11,7 +11,7 @@ function TextContainer(props) {
     const obj = {
       message: message
     }
-    return fetch('http://localhost:3001/translate', {
+    return fetch('http://locahost:3001/translate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,7 +27,7 @@ function TextContainer(props) {
       message: prompt
     }
 
-    return fetch('http://localhost:3001/createImage', {
+    return fetch('http://locahost:3001/createImage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -35,24 +35,38 @@ function TextContainer(props) {
       body: JSON.stringify(obj)
     })
       .then((res) => res.json())
-      .then((res) => res.images[0].image)
+      .then((res) => res?.images[0].image)
   }
 
   const hadleSubmit = async function (e) {
     e.preventDefault();
-    if (prompt) {
-      console.log(prompt);
-      const translatedText = await translate(prompt);
-      console.log(translatedText);
+    const regex = /^[가-힣|a-z|A-Z|0-9|,]+$/;
 
-      const imageUrls = 'data:image/png;base64,' + await getImages(translatedText);
+    if (regex.test(prompt)) {
+      props.setMain('loading');
+      props.setImage(undefined);
 
-      console.log(imageUrls);
-      props.setImage(imageUrls);
+      try {
+        const translatedText = await translate(prompt);
+        console.log(translatedText);
+        const baseCode = await getImages(translatedText);
+
+        const imageUrls = 'data:image/png;base64,' + baseCode;
+
+        console.log(imageUrls);
+        props.setImage(imageUrls);
+      }
+      catch (e) {
+        // props.setMain(error)
+
+        console.log(e);
+      }
+    }
+    else {
+      // props.setMain('invalid')
+      console.log('유효하지 않은 문자열');
     }
   }
-
-  console.log('TextContainer render');
 
   return (
     <section id='text-container'>
@@ -72,12 +86,10 @@ function TextContainer(props) {
               margin: 'auto'
             }}
             onChange={(e) => {
-              setPrompt(e.target.value)
+              setPrompt(e.target.value);
             }}
           />
-          <Button type="submit" variant="contained" onClick={()=>{
-            props.setMain('loading');
-            props.setImage(undefined);
+          <Button type="submit" variant="contained" onClick={() => {
           }}>
             Send
           </Button>
