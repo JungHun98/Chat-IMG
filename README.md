@@ -14,6 +14,8 @@
 
 ex) `밤 -> night`, `다리 -> bridge`
 
+https://junghun98.github.io/Chat-IMG/
+
 ## 기술스택
 ### Front-End
 <img src="https://img.shields.io/badge/react.js-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB"> 
@@ -38,11 +40,6 @@ ex) `밤 -> night`, `다리 -> bridge`
 
 ### :star: 이미지 다운로드
 - 이미지를 생성하고 사용자가 원하는 크기(256~1024)로 다운로드 할 수 있습니다.
-
-## 서비스
-![image](https://user-images.githubusercontent.com/97653343/229962639-faf1c476-8f86-4a48-aa52-00d951a792a7.png)
-
-https://junghun98.github.io/Chat-IMG/
 
 ## 디렉토리 구조
 ```
