@@ -45,26 +45,26 @@ https://junghun98.github.io/Chat-IMG/
 ```
 Chat-IMG
 ├─ README.md
-├─ index.js : node.js 서버
+├─ index.js : 서버 node.js 파일
 ├─ package-lock.json
 ├─ package.json
 ├─ public
 │  ├─ favicon.ico
 │  ├─ index.html
-|  ├─ logo.svg
+│  ├─ logo.svg
 │  ├─ manifest.json
 │  └─ robots.txt
+├─ README.md
 └─ src
    ├─ App.css
    ├─ App.js
    ├─ App.test.js
    ├─ components
    │  ├─ Header.js
-   │  ├─ ImageCreator.js
-   │  ├─ ImageOption.js
-   │  ├─ InitContent.js
+   │  ├─ InitContent.js : 애플리케이션 첫 렌더링 컴포넌트
+   │  ├─ Loading.js : 이미지 생성 컴포넌트
    │  ├─ Main.js
-   │  └─ TextContainer.js
+   │  ├─ TextContainer.js : 프롬프트 입력 컴포넌트
    ├─ css
    │  ├─ Header.css
    │  ├─ ImageCreator.css
