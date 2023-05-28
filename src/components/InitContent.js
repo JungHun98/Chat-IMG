@@ -1,8 +1,10 @@
 import '../App.css';
+import React from 'react'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography'
 import styled from '@emotion/styled';
+import { useMediaQuery } from '@mui/material';
 
 const MyTypography = styled(Typography)({
   fontSize: '0.8em',
@@ -18,6 +20,8 @@ const MyCard = styled(Card)({
 })
 
 function InitContent(props) {
+  const matches = useMediaQuery('(min-width:800px)');
+  
   const ulStyle = {
     width: '800px',
     margin: 'auto',
@@ -26,16 +30,28 @@ function InitContent(props) {
     fontFamily: 'Nanum Gothic, sans-serif'
   }
 
+  const ulStyleMedia = {
+    width: '240px',
+    margin: 'auto',
+    justifyContent: 'space-between',
+    fontFamily: 'Nanum Gothic, sans-serif'
+  }
+
+  const liStyleMedia = {
+    width: '100%'
+  }
+
   const liStyle = {
     width: '30%'
   }
 
   return (
     <section>
+      {/* <span>{`${matches}`}</span> */}
       <h1>Chat IMG</h1>
       <div>
-        <ul style={ulStyle}>
-          <li style={liStyle}>
+        <ul style={matches ? ulStyle:ulStyleMedia}>
+          <li style={matches? liStyle:liStyleMedia}>
             <h2>제시어 예시</h2>
             <MyCard variant="outlined">
               <CardContent>
@@ -59,7 +75,7 @@ function InitContent(props) {
               </CardContent>
             </MyCard>
           </li>
-          <li style={liStyle}>
+          <li style={matches? liStyle:liStyleMedia}>
             <h2>기능</h2>
             <MyCard variant="outlined">
               <CardContent>
@@ -82,7 +98,7 @@ function InitContent(props) {
               </CardContent>
             </MyCard>
           </li>
-          <li style={liStyle}>
+          <li style={matches? liStyle:liStyleMedia}>
             <h2>권장사항</h2>
             <MyCard variant="outlined">
               <CardContent>
