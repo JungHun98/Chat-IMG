@@ -48,7 +48,6 @@ function InitContent(props) {
   return (
     <section>
       {/* <span>{`${matches}`}</span> */}
-      <h1>Chat IMG</h1>
       <div>
         <ul style={matches ? ulStyle:ulStyleMedia}>
           <li style={matches? liStyle:liStyleMedia}>

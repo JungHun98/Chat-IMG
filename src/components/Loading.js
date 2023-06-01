@@ -1,5 +1,5 @@
-import '../App.css';
-import { useState, useEffect } from 'react';
+import React from 'react'
+import { useState } from 'react';
 import Skeleton from '@mui/material/Skeleton';
 import Stack from '@mui/material/Stack';
 import Grid from '@mui/material/Grid';
@@ -7,6 +7,7 @@ import styled from '@emotion/styled';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Alert from '@mui/material/Alert';
+// import { useMediaQuery } from '@mui/material';
 
 const MyStack = styled(Stack)({
   margin: 'auto',
@@ -26,16 +27,18 @@ const ButtonGrid = styled(Grid)({
 })
 
 function Loading(props) {
-  const [image, setImage] = useState(undefined);
+  // const [image, setImage] = useState(undefined);
   const [{ imageSize, warning }, setSize] = useState({
     imageSize: 256,
     warning: false
   });
   
-  useEffect(()=>{
-    console.log(props.image);
-    setImage(props.image)
-  }, [props.image]);
+  // const matches = useMediaQuery('(min-width:600px)');
+  
+  // useEffect(()=>{
+  //   console.log(props.image);
+  //   setImage(props.image)
+  // }, [props.image]);
 
   console.log(imageSize, warning);
 
@@ -43,19 +46,19 @@ function Loading(props) {
     <MyStack spacing={1}>
       {/* For variant="text", adjust the height via font-size */}
       {/* For other variants, adjust the size with `width` and `height` */}
-      {image ? (
+      {props.image ? (
         <div>
-          <img src={image} alt="" width={imageSize}
+          <img src={props.image} alt="생성된 이미지" width={imageSize}
             style={{ transition: '0.3s' }} />
         </div>
       ) : (
         <ImageSkeleton animation="wave" variant="rectangular" width={256} height={256} />
       )}
-      {image ? (
+      {props.image ? (
         <ButtonGrid container wrap="nowrap">
           <TextField
             id="outlined-number"
-            label="Pixel"
+            label="이미지 크기"
             type="number"
             sx={{ width: '100px' }}
             InputLabelProps={{
@@ -87,9 +90,8 @@ function Loading(props) {
           }
           />
           <Button variant="outlined" onClick={(e) => {
-            console.log(imageSize);
             let img = new Image();
-            img.src = image;
+            img.src = props.image;
             img.width = 1024;
             img.height = 1024; // 설정값
 
@@ -102,9 +104,9 @@ function Loading(props) {
             ctx.drawImage(img, 0, 0, imageSize, imageSize);
             
             // imgage download
-            let a = document.createElement("a"); //Create <a>
-            a.href = canvas.toDataURL(); //Image Base64 Goes here
-            a.download = "ChatIMG.png"; //File name Here
+            let a = document.createElement("a");
+            a.href = canvas.toDataURL(); 
+            a.download = "ChatIMG.png";
             a.click();
           }}>Download</Button>
         </ButtonGrid>

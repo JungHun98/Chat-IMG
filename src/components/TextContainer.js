@@ -1,8 +1,10 @@
 import '../css/TextContainer.css';
+import React from 'react'
 import { useState } from 'react';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
+import SendIcon from '@mui/icons-material/Send';
 
 function TextContainer(props) {
   const [prompt, setPrompt] = useState('');
@@ -11,7 +13,7 @@ function TextContainer(props) {
     const obj = {
       message: message
     }
-    return fetch('http://locahost:3001/translate', {
+    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/translate', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -27,20 +29,23 @@ function TextContainer(props) {
       message: prompt
     }
 
-    return fetch('http://locahost:3001/createImage', {
+    return fetch('https://port-0-chat-img-1aac2alg5t1jme.sel3.cloudtype.app/createImage', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(obj)
     })
-      .then((res) => res.json())
+      .then((res) => {
+        console.log(res);
+        return res.json()
+      })
       .then((res) => res?.images[0].image)
   }
 
   const hadleSubmit = async function (e) {
     e.preventDefault();
-    const regex = /^[가-힣|a-z|A-Z|0-9|,]+$/;
+    const regex = /^[가-힣|a-z|A-Z|0-9|, ]+$/;
 
     if (regex.test(prompt)) {
       props.setMain('loading');
@@ -64,7 +69,7 @@ function TextContainer(props) {
     }
     else {
       // props.setMain('invalid')
-      console.log('유효하지 않은 문자열');
+      alert('유효하지 않은 요청입니다. 다시 입력해주세요');
     }
   }
 
@@ -73,8 +78,9 @@ function TextContainer(props) {
       <form onSubmit={hadleSubmit}>
         <Box
           sx={{
-            width: 800,
-            maxWidth: '100%',
+            position: 'relative',
+            width: '100%',
+            maxWidth: 800,
             margin: 'auto',
             marginTop: '20px'
           }}
@@ -83,16 +89,32 @@ function TextContainer(props) {
             fullWidth label="Prompt"
             id="fullWidth"
             sx={{
+              display: 'block',
+              maxWidth: '800px',
+              width: '100%',
               margin: 'auto'
             }}
             onChange={(e) => {
-              setPrompt(e.target.value);
+              if(e.key === 'Enter'){
+                hadleSubmit();
+              }
+              else{
+                setPrompt(e.target.value);
+              }
             }}
           />
-          <Button type="submit" variant="contained" onClick={() => {
-          }}>
-            Send
+          <Button sx={{
+            position: 'absolute',
+            right: '1%',
+            top: '15%'
+          }}
+            type="submit"
+            variant="contained"
+            onClick={() => {
+            }}>
+            <SendIcon/>
           </Button>
+          
         </Box>
       </form>
       {/* <img src={response}></img> */}
